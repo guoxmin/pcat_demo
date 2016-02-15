@@ -1,0 +1,33 @@
+{
+    "res": {
+        "common:widget/footer/footer.css": {
+            "uri": "/common/1.0.1/c/footer_35efb9a.css",
+            "type": "css"
+        },
+        "common:widget/footer/footer.html": {
+            "uri": "/common/1.0.1/template/footer_8caa0ab.html",
+            "type": "html",
+            "deps": [
+                "common:widget/footer/footer.js",
+                "common:widget/footer/footer.css"
+            ]
+        },
+        "common:widget/footer/footer.js": {
+            "uri": "/common/1.0.1/j/footer_f05ddcb.js",
+            "type": "js"
+        },
+        "common:widget/header/header.css": {
+            "uri": "/common/1.0.1/c/header_35efb9a.css",
+            "type": "css"
+        },
+        "common:widget/header/header.html": {
+            "uri": "/common/1.0.1/template/header_f443418.html",
+            "type": "html",
+            "deps": [
+                "common:widget/header/header.css"
+            ]
+        },
+        "hash": "1f20330"
+    },
+    "pkg": {}
+}
