@@ -30,34 +30,27 @@ fis.media('qa').match("/widget/**/(*.js)", {
 })
 
 
-.match("/widget/**/{(*.jpg),(*.png),(*.gif)}", {
+.match(/^\/widget\/(.*\/)*([^\/]+\.(?:png|jpg|gif)$)/i, {
     useHash: true,
-    release: "${project}/${version}/i/$1$2$3",
+    release: "${project}/${version}/i/$2",
     deploy: fis.plugin('local-deliver', {
         to: outputPath + '/qa/static/'
     })
 })
 
-.match("/npm_module/zepeto*j/{(*.jpg),(*.png),(*.gif)}", {
-    useHash: true,
-    release: "${project}/${version}/i/$1$2$3",
-    deploy: fis.plugin('local-deliver', {
-        to: outputPath + '/qa/static/'
-    })
-})
 
-.match("/widget/**/{(*.html),(*.cms),(*.tpl)}", {
+.match(/^\/widget\/(.*\/)*([^\/]+\.(?:html|cms|tpl)$)/i, {
         useHash: true,
         isHtmlLike: true,
         isWidget: true,
         useSameNameRequire: true,
         useMap: true,
-        release: "${project}/${version}/template/$1$2$3",
+        release: "${project}/${version}/template/$2",
         deploy: fis.plugin('local-deliver', {
             to: outputPath + '/qa/template/'
         })
     })
-    .match("/page/**/{(*.html),(*.cms),(*.tpl)}", {
+    .match(/^\/page\/(.*\/)*([^\/]+\.(?:html|cms|tpl)$)/i, {
         // useHash: true,
         useSameNameRequire: true,
         isPage: true,
@@ -65,7 +58,7 @@ fis.media('qa').match("/widget/**/(*.js)", {
             isPage: true
         },
         useMap: true,
-        release: "${project}/${version}/template/$1$2$3",
+        release: "${project}/${version}/template/$2",
         deploy: fis.plugin('local-deliver', {
             to: outputPath + '/qa/template/'
         })
