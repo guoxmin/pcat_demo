@@ -5,7 +5,7 @@
             "type": "css"
         },
         "common:widget/footer/footer.html": {
-            "uri": "/common/1.0.1/template/footer_8caa0ab.html",
+            "uri": "/common/1.0.1/footer_f646370.html",
             "type": "html",
             "deps": [
                 "common:widget/footer/footer.js",
@@ -21,13 +21,12 @@
             "type": "css"
         },
         "common:widget/header/header.html": {
-            "uri": "/common/1.0.1/template/header_f443418.html",
+            "uri": "/common/1.0.1/header_2d46cc6.html",
             "type": "html",
             "deps": [
                 "common:widget/header/header.css"
             ]
-        },
-        "hash": "1f20330"
+        }
     },
     "pkg": {}
 }

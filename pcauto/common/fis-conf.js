@@ -1,13 +1,23 @@
 var meta = require('./package.json');
 
+var path = require("path");
+
 fis.set('namespace', meta.name);
+
+fis.set("PCAT", {});
+
+fis.set("PCAT.project", meta.name);
+fis.set("PCAT.version", meta.version);
 
 
 fis.set('project', meta.name);
 fis.set('version', meta.version);
 
 // 设置输出路径
-var outputPath = "../../_output";
+var outputPath = path.resolve(fis.project.getProjectPath(),"../../_output");
+var tagName = "widget"
+
+
 
 fis.match('*', {
     release: false
@@ -45,7 +55,7 @@ fis.media('qa').match("/widget/**/(*.js)", {
         isWidget: true,
         useSameNameRequire: true,
         useMap: true,
-        release: "${project}/${version}/template/$2",
+        release: "${project}/${version}/$2",
         deploy: fis.plugin('local-deliver', {
             to: outputPath + '/qa/template/'
         })
@@ -58,82 +68,26 @@ fis.media('qa').match("/widget/**/(*.js)", {
             isPage: true
         },
         useMap: true,
-        release: "${project}/${version}/template/$2",
+        release: "${project}/${version}/$2",
         deploy: fis.plugin('local-deliver', {
             to: outputPath + '/qa/template/'
         })
     })
 
 
+
 fis.media('qa').match("*.html", {
-    parser: fis.plugin("widget-load")
+    parser: fis.plugin("widget-load", {
+        tagName: "widget",
+        outputPath: path.resolve(fis.project.getProjectPath(),"../../_output")
+    })
 })
 
-.match("::package", {
-    packager: function(ret, conf, settings, opt) {
-        var projectPath = fis.project.getProjectPath();
-
-        var res = ret.map["res"];
-
-        // 已存在的项目
-        var project = {};
-
-        Object.keys(res).forEach(function(key, index) {
-           var namespace = key.split(":")[0];
-           project[namespace] = true;
-        });
-
-
-        Object.keys(res).forEach(function(key, index) {
-            var id = res[key];
-
-            if (id.extras && id.extras.isPage) {
-                comboMap(id["deps"]);
-            }
-        });
-
-        // 生成依赖表MD5
-        res["hash"] = fis.util.md5(JSON.stringify(res));
-
-        function comboMap(deps) {
-            deps.forEach(function(dep, index) {
-
-                var namespace = dep.split(":")[0];
-
-                if (project[namespace]) return;
-
-                var ohterDeps = requireOhteProjectDeps(namespace, dep);
-
-                extend(res,ohterDeps["res"]);
-
-                project[namespace] = true;
-
-            })
-        }
-
-        function extend(target,object){
-            for(var x in object){
-                target[x] = object[x];
-            }
-        }
-
-
-        // 获取其他系统的依赖表
-        function requireOhteProjectDeps(project, dep) {
-
-           var version = require(projectPath + "/../" + project + "/package.json").version;
-            var media = fis.project.currentMedia() || "dev";
-
-            // 跨系统获取资源依赖表
-            var mapPath = projectPath + "/" + outputPath + "/" + media + "/map/" + project + "/" + version + "/map.json";
-
-
-            var map = require(mapPath);
-
-            return map;
-        }
-
-    }
+.match("::package",{
+    packager:fis.plugin("widget-render",{
+        tagName: "widget",
+        outputPath:  path.resolve(fis.project.getProjectPath(),"../../_output")
+    })
 })
 
 .match("*map.json", {

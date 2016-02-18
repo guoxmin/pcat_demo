@@ -1,43 +1,74 @@
 {
     "res": {
-        "index:widget/header/header.html": {
-            "uri": "/index/1.0.1/template/header_898da2d.html",
+        "index:widget/site/site.html": {
+            "uri": "/index/1.0.1/site_aba3cf2.html",
             "type": "html",
             "deps": [
-                "index:widget/header/header.css"
+                "index:widget/site/site.js",
+                "index:widget/site/site.css"
             ]
         },
-        "index:widget/header/header.css": {
-            "uri": "/index/1.0.1/c/header_35efb9a.css",
-            "type": "css"
-        },
-        "index:widget/footer/footer.html": {
-            "uri": "/index/1.0.1/template/footer_e0caa99.html",
-            "type": "html",
-            "deps": [
-                "index:widget/footer/footer.js",
-                "index:widget/footer/footer.css"
-            ]
-        },
-        "index:widget/footer/footer.js": {
-            "uri": "/index/1.0.1/j/footer_f05ddcb.js",
+        "index:widget/site/site.js": {
+            "uri": "/index/1.0.1/j/site_35efb9a.js",
             "type": "js"
         },
-        "index:widget/footer/footer.css": {
-            "uri": "/index/1.0.1/c/footer_35efb9a.css",
+        "index:widget/site/site.css": {
+            "uri": "/index/1.0.1/c/site_35efb9a.css",
+            "type": "css"
+        },
+        "index:widget/list/list.html": {
+            "uri": "/index/1.0.1/list_6866249.html",
+            "type": "html",
+            "deps": [
+                "index:widget/site/site.js",
+                "index:widget/site/site.css",
+                "index:widget/list/list.js",
+                "index:widget/list/list.css"
+            ]
+        },
+        "index:widget/list/list.js": {
+            "uri": "/index/1.0.1/j/list_f05ddcb.js",
+            "type": "js"
+        },
+        "index:widget/list/list.css": {
+            "uri": "/index/1.0.1/c/list_35efb9a.css",
+            "type": "css"
+        },
+        "index:widget/tab/tab.html": {
+            "uri": "/index/1.0.1/tab_876bb8f.html",
+            "type": "html",
+            "deps": [
+                "index:widget/site/site.js",
+                "index:widget/site/site.css",
+                "index:widget/list/list.js",
+                "index:widget/list/list.css",
+                "index:widget/tab/tab.js",
+                "index:widget/tab/tab.css"
+            ]
+        },
+        "index:widget/tab/tab.js": {
+            "uri": "/index/1.0.1/j/tab_35efb9a.js",
+            "type": "js"
+        },
+        "index:widget/tab/tab.css": {
+            "uri": "/index/1.0.1/c/tab_35efb9a.css",
             "type": "css"
         },
         "index:page/index/index.html": {
-            "uri": "/index/1.0.1/template/index.html",
+            "uri": "/index/1.0.1/index.html",
             "type": "html",
             "extras": {
                 "isPage": true
             },
             "deps": [
                 "common:widget/header/header.html",
-                "index:widget/header/header.css",
-                "index:widget/footer/footer.js",
-                "index:widget/footer/footer.css"
+                "common:widget/footer/footer.html",
+                "index:widget/site/site.js",
+                "index:widget/site/site.css",
+                "index:widget/list/list.js",
+                "index:widget/list/list.css",
+                "index:widget/tab/tab.js",
+                "index:widget/tab/tab.css"
             ]
         },
         "common:widget/footer/footer.css": {
@@ -45,7 +76,7 @@
             "type": "css"
         },
         "common:widget/footer/footer.html": {
-            "uri": "/common/1.0.1/template/footer_8caa0ab.html",
+            "uri": "/common/1.0.1/footer_f646370.html",
             "type": "html",
             "deps": [
                 "common:widget/footer/footer.js",
@@ -61,13 +92,12 @@
             "type": "css"
         },
         "common:widget/header/header.html": {
-            "uri": "/common/1.0.1/template/header_f443418.html",
+            "uri": "/common/1.0.1/header_2d46cc6.html",
             "type": "html",
             "deps": [
                 "common:widget/header/header.css"
             ]
-        },
-        "hash": "737942c"
+        }
     },
     "pkg": {}
 }
