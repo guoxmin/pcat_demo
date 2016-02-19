@@ -15,25 +15,23 @@ fis.set('version', meta.version);
 var tagName = "widget";
 
 // 设置输出路径
-var outputPath = path.resolve(fis.project.getProjectPath(),"../../_output");
+var outputPath = path.resolve(fis.project.getProjectPath(), "../../_output");
 
 var media = fis.project.currentMedia() || "dev";
 
-var site = path.resolve(fis.project.getProjectPath(),"../").split(path.sep).reverse()[0];
+var site = path.resolve(fis.project.getProjectPath(), "../").split(path.sep).reverse()[0];
 
 fis.set("PCAT", {
-    project:meta.name,
-    version:meta.version,
-    media:media,
-    site:site,
-    tagName:"widget",//约束为与组件目录同名
-    mapOutputPath:path.resolve(outputPath,media,"map",site),
-    staticOutputPath:path.resolve(outputPath,media,"static",site),
-    templateOutputPath:path.resolve(outputPath,media,"template",site)
+    project: meta.name,
+    version: meta.version,
+    media: media,
+    site: site,
+    tagName: "widget", //约束为与组件目录同名
+    mapOutputPath: path.resolve(outputPath, media, "map", site),
+    staticOutputPath: path.resolve(outputPath, media, "static", site),
+    templateOutputPath: path.resolve(outputPath, media, "template", site)
 });
 
-console.log(fis.get("PCAT.mapOutputPath"))
-console.log(outputPath + '/qa/map/pcauto/')
 
 
 fis.match('*', {
@@ -118,19 +116,23 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     })
 
 
-
-
 fis.media('qa').match("*.html", {
     parser: fis.plugin("widget-load", {
-        tagName: "widget",
-        outputPath: outputPath
+
+        project: fis.get("PCAT.project"),
+
+        tagName: fis.get("PCAT.tagName"),
+
+        mapOutputPath: fis.get("PCAT.mapOutputPath"),
+
+        templateOutputPath: fis.get("PCAT.templateOutputPath")
     })
 })
 
-.match("::package",{
-    packager:fis.plugin("widget-render",{
-        tagName: "widget",
-        outputPath:  outputPath
+.match("::package", {
+    packager: fis.plugin("widget-render", {
+        tagName: fis.get("PCAT.tagName"),
+        mapOutputPath: fis.get("PCAT.mapOutputPath")
     })
 })
 
