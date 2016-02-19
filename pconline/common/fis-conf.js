@@ -11,29 +11,22 @@ fis.set('namespace', meta.name);
 fis.set('project', meta.name);
 fis.set('version', meta.version);
 
-
-var tagName = "widget";
-
 // 设置输出路径
 var outputPath = path.resolve(fis.project.getProjectPath(),"../../_output");
+var tagName = "widget"
 
 var media = fis.project.currentMedia() || "dev";
 
-var site = path.resolve(fis.project.getProjectPath(),"../").split(path.sep).reverse()[0];
+var site = path.resolve(fis.project.getProjectPath(),"../");
 
 fis.set("PCAT", {
     project:meta.name,
     version:meta.version,
     media:media,
-    site:site,
-    tagName:"widget",//约束为与组件目录同名
-    mapOutputPath:path.resolve(outputPath,media,"map",site),
-    staticOutputPath:path.resolve(outputPath,media,"static",site),
-    templateOutputPath:path.resolve(outputPath,media,"template",site)
+    mapPath:path.resolve(outputPath,media,"map")
 });
 
-console.log(fis.get("PCAT.mapOutputPath"))
-console.log(outputPath + '/qa/map/pcauto/')
+console.log(site)
 
 
 fis.match('*', {
@@ -44,7 +37,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     useHash: true,
     release: "${project}/${version}/j/$2",
     deploy: fis.plugin('local-deliver', {
-        to: fis.get("PCAT.staticOutputPath")
+        to: outputPath + '/qa/static/pcauto/'
     })
 })
 
@@ -52,7 +45,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     useHash: true,
     release: "${project}/${version}/j/$2",
     deploy: fis.plugin('local-deliver', {
-        to: fis.get("PCAT.staticOutputPath")
+        to: outputPath + '/qa/static/pcauto/'
     })
 })
 
@@ -60,7 +53,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     useHash: true,
     release: "${project}/${version}/c/$2",
     deploy: fis.plugin('local-deliver', {
-        to: fis.get("PCAT.staticOutputPath")
+        to: outputPath + '/qa/static/pcauto/'
     })
 })
 
@@ -68,7 +61,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     useHash: true,
     release: "${project}/${version}/c/$2",
     deploy: fis.plugin('local-deliver', {
-        to: fis.get("PCAT.staticOutputPath")
+        to: outputPath + '/qa/static/pcauto/'
     })
 })
 
@@ -78,7 +71,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     useHash: true,
     release: "${project}/${version}/i/$2",
     deploy: fis.plugin('local-deliver', {
-        to: fis.get("PCAT.staticOutputPath")
+        to: outputPath + '/qa/static/pcauto/'
     })
 })
 
@@ -86,7 +79,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     useHash: true,
     release: "${project}/${version}/i/$2",
     deploy: fis.plugin('local-deliver', {
-        to: fis.get("PCAT.staticOutputPath")
+        to: outputPath + '/qa/static/pcauto/'
     })
 })
 
@@ -100,7 +93,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
         useMap: true,
         release: "${project}/${version}/$2",
         deploy: fis.plugin('local-deliver', {
-            to: fis.get("PCAT.templateOutputPath")
+            to: outputPath + '/qa/template/pcauto/'
         })
     })
     .match(/^\/page\/(.*\/)*([^\/]+\.(?:html|cms|tpl)$)/i, {
@@ -113,7 +106,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
         useMap: true,
         release: "${project}/${version}/$2",
         deploy: fis.plugin('local-deliver', {
-            to: fis.get("PCAT.templateOutputPath")
+            to: outputPath + '/qa/template/pcauto/'
         })
     })
 
@@ -138,6 +131,6 @@ fis.media('qa').match("*.html", {
     useHash: false,
     release: "${project}/${version}/$0",
     deploy: fis.plugin('local-deliver', {
-        to: fis.get("PCAT.mapOutputPath")
+        to: outputPath + '/qa/map/pcauto/'
     })
 })

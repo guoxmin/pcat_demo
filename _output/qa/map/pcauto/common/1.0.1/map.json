@@ -1,0 +1,40 @@
+{
+    "res": {
+        "common:page/index/index.css": {
+            "uri": "/common/1.0.1/c/index_9c4b360.css",
+            "type": "css"
+        },
+        "common:page/index/index.js": {
+            "uri": "/common/1.0.1/j/index_9c4b360.js",
+            "type": "js"
+        },
+        "common:widget/footer/footer.css": {
+            "uri": "/common/1.0.1/c/footer_35efb9a.css",
+            "type": "css"
+        },
+        "common:widget/footer/footer.html": {
+            "uri": "/common/1.0.1/footer_f646370.html",
+            "type": "html",
+            "deps": [
+                "common:widget/footer/footer.js",
+                "common:widget/footer/footer.css"
+            ]
+        },
+        "common:widget/footer/footer.js": {
+            "uri": "/common/1.0.1/j/footer_f05ddcb.js",
+            "type": "js"
+        },
+        "common:widget/header/header.css": {
+            "uri": "/common/1.0.1/c/header_35efb9a.css",
+            "type": "css"
+        },
+        "common:widget/header/header.html": {
+            "uri": "/common/1.0.1/header_2d46cc6.html",
+            "type": "html",
+            "deps": [
+                "common:widget/header/header.css"
+            ]
+        }
+    },
+    "pkg": {}
+}
