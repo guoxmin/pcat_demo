@@ -27,6 +27,7 @@ fis.set("PCAT", {
     media: media,
     site: site,
     tagName: "widget", //约束为与组件目录同名
+    serverPath:path.resolve(outputPath, media),
     mapOutputPath: path.resolve(outputPath, media, "map", site),
     staticOutputPath: path.resolve(outputPath, media, "static", site),
     templateOutputPath: path.resolve(outputPath, media, "template", site)
@@ -38,7 +39,21 @@ fis.match('*', {
     release: false
 });
 
-fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
+fis.match('server/*.js', {
+    release:"$0",
+    deploy: fis.plugin('local-deliver', {
+        to: fis.get("PCAT.serverPath")
+    })
+});
+
+fis.match('package.json', {
+    release:"$0",
+    deploy: fis.plugin('local-deliver', {
+        to: fis.get("PCAT.serverPath")
+    })
+});
+
+fis.media('dev').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     useHash: true,
     release: "${project}/${version}/j/$2",
     deploy: fis.plugin('local-deliver', {
@@ -116,7 +131,7 @@ fis.media('qa').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
     })
 
 
-fis.media('qa').match("*.html", {
+fis.media('dev').match("*.html", {
     parser: fis.plugin("widget-load", {
 
         project: fis.get("PCAT.project"),
@@ -143,3 +158,4 @@ fis.media('qa').match("*.html", {
         to: fis.get("PCAT.mapOutputPath")
     })
 })
+
