@@ -30,6 +30,7 @@ fis.set("PCAT", {
     serverPath:path.resolve(outputPath, media),
     mapOutputPath: path.resolve(outputPath, media, "map", site),
     staticOutputPath: path.resolve(outputPath, media, "static", site),
+    pageOutputPath: path.resolve(outputPath, media, "page", site),
     templateOutputPath: path.resolve(outputPath, media, "template", site)
 });
 
@@ -126,7 +127,7 @@ fis.media('dev').match(/^\/widget\/(.*\/)*([^\/]+\.js$)/i, {
         useMap: true,
         release: "${project}/${version}/$2",
         deploy: fis.plugin('local-deliver', {
-            to: fis.get("PCAT.templateOutputPath")
+            to: fis.get("PCAT.pageOutputPath")
         })
     })
 
